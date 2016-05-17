@@ -1,0 +1,51 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.listing._id ? 'Edit Listing' : 'New Listing'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.listingForm" class="form-horizontal" ng-submit="vm.save(vm.form.listingForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Title</label>
+          <input name="name" type="text" ng-model="vm.listing.name" id="name" class="form-control input-group-lg" placeholder="Title" required>
+          <div ng-messages="vm.form.listingForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Listing title is required.</p>
+          </div>
+        </div>
+        <div class="row">
+        <div class="form-group" show-errors>
+          <label class="control-label" for="desc">Description</label>
+          <div class="input-group"><input name="desc" type="text" ng-model="vm.listing.desc" id="desc" class="form-control" placeholder="Description" required>
+          <div ng-messages="vm.form.listingForm.desc.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Listing title is required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="row">
+        <div class="form-group" show-errors>
+          <label class="control-label" for="startCost">Starting Price</label>
+          <div class="input-group input-group-sm"><span class="input-group-addon">$</span><input name="startCost" type="number" step=".05" ng-model="vm.listing.startCost" id="startCost" class="form-control" placeholder="Starting Price in USD" required></div>
+          <div ng-messages="vm.form.listingForm.startCost.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Listing title is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="closeDate">Closing Date</label>
+          <div class="input-group input-group-sm"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+            <input name="closeDate" type="date" ng-model="vm.listing.closeDate" id="closeDate" class="form-control" placeholder="Starting Price in USD" required></div>
+          <div ng-messages="vm.form.listingForm.closeDate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Listing title is required.</p>
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.listing._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

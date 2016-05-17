@@ -1,0 +1,58 @@
+<!-- The chat view -->
+<section class="container" ng-controller="ChatController">
+  <div class="page-header">
+    <h1>OpenAuction Chat!</h1>
+
+    <h2>This is a basic 2 player chat game. Pick a number 1 to 10, if you beat the dealer, you win!</h2>
+
+    <table ng-show="over"><tr ng-repeat="score in scores track by $index"><td>{{score}}</td></tr></table>
+
+
+    <h3>You only get 3 choices! This is your count {{counter}}</h3>
+    <h3>TEST! This is your score {{score}}</h3>
+
+  </div>
+  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="sendBlast();">
+    <fieldset class="row">
+      <div class="input-group input-group-sm">
+        <input type="number" min="1" max="9" id="blastText" name="blastText" ng-model="blastText" class="form-control" placeholder="Enter your BLAST!">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-danger" ng-disabled="counter >= 3">Guess A Number!!!</button>
+        </span>
+      </div>
+    </fieldset>
+  </form>
+  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="sendGameText();">
+    <fieldset class="row">
+      <div class="input-group" data-ng-show="counter >= 3">
+        <input type="text" id="sendGameText" name="sendGameText" class="form-control" ng-model="score" placeholder="Say anything.">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary">Submit Your Score</button>
+        </span>
+      </div>
+    </fieldset>
+  </form>
+  <!-- The message form -->
+  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="sendMessage();">
+    <fieldset class="row">
+      <div class="input-group">
+        <input type="text" id="messageText" name="messageText" class="form-control" ng-model="messageText" placeholder="Enter new message">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-disabled="!messageText.length">Submit</button>
+        </span>
+      </div>
+    </fieldset>
+  </form>
+  <ul class="list-unstyled">
+    <!-- List all messages -->
+    <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in messages">
+      <small class="pull-right text-muted" ng-bind="message.created | date:'mediumTime'"></small>
+      <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
+      <div class="pull-left chat-message-details">
+        <strong ng-bind="message.username"></strong>
+        <br>
+        <span ng-bind="message.text"></span>
+      </div>
+    </li>
+  </ul>
+</section>
